@@ -2,22 +2,26 @@ import { useState } from 'react';
 import PinCodeDisplay from './PinCodeDisplay';
 import Keyboard from '../Keyboard/Keyboard';
 import Preloader from '../../common/Preloader/Preloader';
+import ErrorModal from './ErrorModal/ErrorModal'; // Модальное окно
+import ErrorScreen from './ErrorScreen/ErrorScreen'; // Отдельный экран
 import styles from './PinCodeContainer.module.css';
 
 const correctPins = ['123456', '234567', '345678', '456789'];
 
 export default function PinCodeContainer() {
-  const [pin, setPin] = useState('')
-  const [message, setMessage] = useState('')
-  const [blocked, setBlocked] = useState(false)
-  const [attempts, setAttempts] = useState(0)
-  const [isLoading, setIsLoading] = useState(false)
+  const [pin, setPin] = useState('');
+  const [message, setMessage] = useState('');
+  const [blocked, setBlocked] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showErrorScreen, setShowErrorScreen] = useState(false);
 
   const handleClear = () => setPin('');
 
   const handleDigitClick = (digit) => {
-    if (blocked || pin.length >= 6) return
-    setPin((prev) => prev + digit)
+    if (blocked || pin.length >= 6) return;
+    setPin((prev) => prev + digit);
   };
 
   const handleSubmit = () => {
@@ -25,24 +29,30 @@ export default function PinCodeContainer() {
     setIsLoading(true);
     setTimeout(() => {
       if (correctPins.includes(pin)) {
-        setMessage('Получите ваш заказ')
+        setMessage('Получите ваш заказ');
       } else {
-        setMessage('Неверный Pin')
+        setMessage('Неверный Pin');
+        setShowModal(true); 
         setAttempts((prev) => prev + 1);
-        setPin('')
+        setPin('');
 
         if (attempts + 1 >= 3) {
-          setBlocked(true)
-          setMessage('3 неверных попытки ввода pin, экран заблокирован на 3 минуты');
+          setBlocked(true);
+          setShowErrorScreen(true); 
           setTimeout(() => {
-            setBlocked(false)
-            setAttempts(0)
-            setMessage('')
-          }, 180000) 
+            setBlocked(false);
+            setAttempts(0);
+            setMessage('');
+            setShowErrorScreen(false); 
+          }, 180000);
         }
       }
-      setIsLoading(false)
-    }, 1000)
+      setIsLoading(false);
+    }, 1000);
+  };
+
+  if (showErrorScreen) {
+    return <ErrorScreen message="3 неверных попытки ввода pin, экран заблокирован на 3 минуты" />;
   }
 
   return (
@@ -50,7 +60,12 @@ export default function PinCodeContainer() {
       <PinCodeDisplay pin={pin} />
       <Keyboard onDigitClick={handleDigitClick} onClear={handleClear} onSubmit={handleSubmit} />
       {isLoading && <Preloader />}
-      {message && <div className={styles.message}>{message}</div>}
+      {showModal && (
+        <ErrorModal
+          message={message}
+          onClose={() => setShowModal(false)} 
+        />
+      )}
     </div>
-  )
+  );
 }
