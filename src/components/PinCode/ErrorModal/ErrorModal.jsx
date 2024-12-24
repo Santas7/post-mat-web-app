@@ -1,6 +1,6 @@
-import React from "react";
-import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button } from "@mui/material";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import React from "react"
+import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button } from "@mui/material"
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline"
 
 export default function ErrorModal({ message, onClose }) {
   return (

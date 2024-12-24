@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PinCodeContainer from './components/PinCode/PinCodeContainer';
 import styles from './App.module.css';
+import ReceiveParcel from './components/PinCode/ReceiveParcel/ReceiveParcel';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home'); // Управление текущей страницей
+  const [currentPage, setCurrentPage] = useState('home'); 
 
   const renderPage = () => {
     switch (currentPage) {
@@ -23,6 +24,8 @@ export default function App() {
             <button onClick={() => setCurrentPage('home')}>Вернуться на главную</button>
           </div>
         );
+      case 'receiveParcel':
+        return <ReceiveParcel onNavigate={setCurrentPage} />
       default:
         return (
           <div className={styles.notFound}>

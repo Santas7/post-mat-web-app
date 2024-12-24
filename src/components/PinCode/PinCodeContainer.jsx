@@ -8,7 +8,7 @@ import styles from './PinCodeContainer.module.css';
 
 const correctPins = ['123456', '234567', '345678', '456789'];
 
-export default function PinCodeContainer() {
+export default function PinCodeContainer({ onNavigate }) {
   const [pin, setPin] = useState('');
   const [message, setMessage] = useState('');
   const [blocked, setBlocked] = useState(false);
@@ -30,6 +30,9 @@ export default function PinCodeContainer() {
     setTimeout(() => {
       if (correctPins.includes(pin)) {
         setMessage('Получите ваш заказ');
+        setTimeout(() => {
+          onNavigate('receiveParcel'); 
+        }, 500); 
       } else {
         setMessage('Неверный Pin');
         setShowModal(true); 
@@ -46,15 +49,16 @@ export default function PinCodeContainer() {
             setMessage('');
             setShowErrorScreen(false); 
             setShowModal(false);
-          }, 30000);
+          }, 2000);
         }
       }
       setIsLoading(false);
     }, 1000);
   };
 
-  if (showErrorScreen) 
-    return <ErrorScreen message="3 неверных попытки ввода pin, экран заблокирован на 30 секунд" />;
+  if (showErrorScreen) {
+    return <ErrorScreen message="3 неверных попытки ввода pin, экран заблокирован на 3 минуты" />;
+  }
 
   return (
     <div className={styles.container}>

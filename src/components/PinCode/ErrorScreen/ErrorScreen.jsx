@@ -1,6 +1,6 @@
-import React from "react";
-import { Typography, Container } from "@mui/material";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import React from "react"
+import { Typography, Container } from "@mui/material"
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline"
 
 export default function ErrorScreen({ message }) {
   return (
