@@ -37,6 +37,7 @@ export default function PinCodeContainer() {
         setPin('');
 
         if (attempts + 1 >= 3) {
+          setShowModal(false);
           setBlocked(true);
           setShowErrorScreen(true); 
           setTimeout(() => {
@@ -44,6 +45,7 @@ export default function PinCodeContainer() {
             setAttempts(0);
             setMessage('');
             setShowErrorScreen(false); 
+            setShowModal(false);
           }, 30000);
         }
       }
