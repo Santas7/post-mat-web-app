@@ -25,7 +25,7 @@ export default function App() {
           </div>
         );
       case 'receiveParcel':
-        return <ReceiveParcel onNavigate={setCurrentPage} />
+        return <ReceiveParcel onNavigate={setCurrentPage} />; 
       default:
         return (
           <div className={styles.notFound}>
@@ -33,7 +33,7 @@ export default function App() {
             <button onClick={() => setCurrentPage('home')}>Вернуться на главную</button>
           </div>
         );
-    }
+      }
   };
 
   return <div className={styles.app}>{renderPage()}</div>;
