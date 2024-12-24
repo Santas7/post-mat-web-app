@@ -8,4 +8,8 @@
     width: 150px;
     background-color: #fff;
 }
-  
+
+.pinCode::placeholder {
+    color: #aaa; 
+    text-align: center;
+}
