@@ -1,15 +1,14 @@
-import React, { useEffect } from 'react';
-import { Button, CircularProgress, Typography, Box } from '@mui/material';
-import styles from './ReceiveParcel.module.css';
+import React, { useEffect } from 'react'
+import { Button, CircularProgress, Typography, Box } from '@mui/material'
+import styles from './ReceiveParcel.module.css'
 
 export default function ReceiveParcel({ onNavigate }) {
   useEffect(() => {
     const timer = setTimeout(() => {
-      onNavigate('home');
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }, [onNavigate]);
+      onNavigate('home'); 
+    }, 10000)
+    return () => clearTimeout(timer)
+  }, [onNavigate])
 
   return (
     <Box className={styles.container} sx={{ textAlign: 'center', mt: 4 }}>
@@ -26,11 +25,11 @@ export default function ReceiveParcel({ onNavigate }) {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => onNavigate('pinCode')}
+        onClick={() => onNavigate('home')} 
         sx={{ marginTop: 2 }}
       >
         Перейти сейчас
       </Button>
     </Box>
-  );
+  )
 }
