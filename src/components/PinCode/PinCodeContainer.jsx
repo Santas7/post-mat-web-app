@@ -49,7 +49,7 @@ export default function PinCodeContainer({ onNavigate }) {
             setMessage('');
             setShowErrorScreen(false); 
             setShowModal(false);
-          }, 2000);
+          }, 30000);
         }
       }
       setIsLoading(false);
@@ -57,7 +57,7 @@ export default function PinCodeContainer({ onNavigate }) {
   };
 
   if (showErrorScreen) {
-    return <ErrorScreen message="3 неверных попытки ввода pin, экран заблокирован на 3 минуты" />;
+    return <ErrorScreen message="3 неверных попытки ввода pin, экран заблокирован на 30 секунд" />;
   }
 
   return (
