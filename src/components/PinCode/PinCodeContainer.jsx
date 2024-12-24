@@ -2,8 +2,8 @@ import { useState } from 'react';
 import PinCodeDisplay from './PinCodeDisplay';
 import Keyboard from '../Keyboard/Keyboard';
 import Preloader from '../../common/Preloader/Preloader';
-import ErrorModal from './ErrorModal/ErrorModal'; // Модальное окно
-import ErrorScreen from './ErrorScreen/ErrorScreen'; // Отдельный экран
+import ErrorModal from './ErrorModal/ErrorModal'; 
+import ErrorScreen from './ErrorScreen/ErrorScreen'; 
 import styles from './PinCodeContainer.module.css';
 
 const correctPins = ['123456', '234567', '345678', '456789'];
@@ -44,16 +44,15 @@ export default function PinCodeContainer() {
             setAttempts(0);
             setMessage('');
             setShowErrorScreen(false); 
-          }, 180000);
+          }, 30000);
         }
       }
       setIsLoading(false);
     }, 1000);
   };
 
-  if (showErrorScreen) {
-    return <ErrorScreen message="3 неверных попытки ввода pin, экран заблокирован на 3 минуты" />;
-  }
+  if (showErrorScreen) 
+    return <ErrorScreen message="3 неверных попытки ввода pin, экран заблокирован на 30 секунд" />;
 
   return (
     <div className={styles.container}>
