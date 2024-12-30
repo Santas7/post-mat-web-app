@@ -1,6 +1,8 @@
 {
   "short_name": "React App",
   "name": "Create React App Sample",
+  "description": "A sample React app created with Create React App.",
+  "id": "/",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +22,10 @@
   ],
   "start_url": ".",
   "display": "standalone",
+  "orientation": "portrait",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }
